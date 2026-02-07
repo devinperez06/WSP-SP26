@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUNY New Paltz HvZ - Join</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Humans vs Zombies</h1>
+        <p>SUNY New Paltz Chapter</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="rules.html">Rules</a>
+            <a href="events.html">Events</a>
+            <a href="contact.html" class="active">Join</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Join the Horde (or Resist It)</h2>
+        <p>Registration for the Spring 2026 game is OPEN.</p>
+        
+        <div style="background-color: #333; padding: 20px; border: 1px dashed var(--zombie-green);">
+            <h3>Player Registration Form</h3>
+            <p>Fill out the form below to sign up. You will receive an email with your unique Player ID.</p>
+            
+            <form action="#" method="get">
+                <div style="margin-bottom: 15px;">
+                    <label for="name" style="display: block; color: var(--text-color);">Full Name:</label>
+                    <input type="text" id="name" name="name" style="width: 100%; padding: 8px; background: #111; color: #fff; border: 1px solid #555;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="email" style="display: block; color: var(--text-color);">School Email (.edu only):</label>
+                    <input type="email" id="email" name="email" style="width: 100%; padding: 8px; background: #111; color: #fff; border: 1px solid #555;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="faction" style="display: block; color: var(--text-color);">Preferred Faction (No Guarantees):</label>
+                    <select id="faction" name="faction" style="width: 100%; padding: 8px; background: #111; color: #fff; border: 1px solid #555;">
+                        <option value="human">Human</option>
+                        <option value="volunteer-zombie">Volunteer Zombie (Start Infected)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">SUBMIT REGISTRATION</button>
+            </form>
+        </div>
+
+        <h3>Contact Moderation Team</h3>
+        <p>Have questions? Report an issue? Saw a zombie cheating?</p>
+        <p>Email: <a href="mailto:hvz@newpaltz.edu" style="color: var(--zombie-green);">hvz@newpaltz.edu</a></p>
+        <p>Follow us on Instagram: @newpaltzhvz</p>
+    </div>
+
+    <footer>
+        &copy; 2026 SUNY New Paltz Humans vs Zombies Club. Stay Alert. Stay Alive.
+    </footer>
+</body>
+</html>

@@ -1,0 +1,125 @@
+:root {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --zombie-green: #76ff03;
+    --blood-red: #d50000;
+    --accent-gray: #333333;
+    --container-bg: #1e1e1e;
+    --font-main: 'Courier New', Courier, monospace;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--accent-gray);
+    border-bottom: 4px solid var(--blood-red);
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    color: var(--zombie-green);
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px #000;
+    margin: 0;
+}
+
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+    color: var(--bg-color);
+    background-color: var(--zombie-green);
+    border-color: var(--zombie-green);
+    box-shadow: 0 0 10px var(--zombie-green);
+}
+
+.container {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--container-bg);
+    border: 1px solid var(--accent-gray);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+h2 {
+    color: var(--blood-red);
+    border-bottom: 2px dashed var(--accent-gray);
+    padding-bottom: 10px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--blood-red);
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid var(--blood-red);
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: transparent;
+    color: var(--blood-red);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--accent-gray);
+    color: #777;
+    font-size: 0.9rem;
+    margin-top: 40px;
+    border-top: 4px solid var(--zombie-green);
+}
+
+/* Specific page styling */
+.rules-list li {
+    margin-bottom: 10px;
+    list-style-type: square; 
+    color: var(--zombie-green);
+}
+
+.rules-list li span {
+    color: var(--text-color);
+}
+
+.event-card {
+    border: 1px solid var(--accent-gray);
+    padding: 15px;
+    margin-bottom: 20px;
+    background: #252525;
+}
+
+.event-date {
+    color: var(--zombie-green);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
