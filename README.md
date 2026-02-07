@@ -8,6 +8,6 @@ I am looking forward to gaining experience with newer web-dev tools, whether tha
 
 ## Picture
 
-<img src="https://github.com/user-attachments/assets/fc7588a5-e10d-4ed7-953d-75e1ad48d22b" alt="Headshot from the Spring '25 career fair" width="200" height="400">  
+<img src="https://github.com/user-attachments/assets/fc7588a5-e10d-4ed7-953d-75e1ad48d22b" alt="Headshot from the Spring '25 career fair" width="300" height="400">  
 
 _This is a photo of me from the SUNY New Paltz Spring '25 career fair._  
