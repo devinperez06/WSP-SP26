@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechHub - E-Commerce Store</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card {
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #363636;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #7a7a7a;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3273dc;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f14668;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: #fafafa;
+            border-top: 1px solid #e8e8e8;
+            margin-top: 3rem;
+        }
+
+        .category-pill {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-pill.is-active {
+            background-color: #3273dc;
+            color: white;
+        }
+
+        .rating {
+            color: #ffa500;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="#" style="font-size: 1.5rem; font-weight: bold; color: #3273dc;">
+                <i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i>
+                TechHub
+            </a>
+            <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" @click="toggleMenu" :class="{ 'is-active': isMenuActive }">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarMenu" class="navbar-menu" :class="{ 'is-active': isMenuActive }">
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <input class="input" type="text" placeholder="Search products...">
+                        </p>
+                    </div>
+                </div>
+                <div class="navbar-item">
+                    <div class="cart-icon">
+                        <a href="#" class="button is-light">
+                            <span class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </span>
+                            <span>Cart</span>
+                        </a>
+                        <div class="cart-count">0</div>
+                    </div>
+                </div>
+                <div class="navbar-item">
+                    <a href="#" class="button is-light">
+                        <span class="icon">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <span>Account</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="title" style="color: white;">Welcome to TechHub</h1>
+                <p class="subtitle" style="color: rgba(255, 255, 255, 0.9);">Discover the latest technology products at unbeatable prices</p>
+                <a href="#products" class="button is-warning is-large">
+                    <span>Shop Now</span>
+                    <span class="icon is-small">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Filters Section -->
+        <section class="section">
+            <div class="container">
+                <div class="columns">
+                    <div class="column">
+                        <h2 class="title is-4">Categories</h2>
+                        <div class="buttons are-outlined">
+                            <button class="button category-pill is-active">All Products</button>
+                            <button class="button category-pill">Laptops</button>
+                            <button class="button category-pill">Smartphones</button>
+                            <button class="button category-pill">Accessories</button>
+                        </div>
+                    </div>
+                    <div class="column has-text-right">
+                        <div class="field">
+                            <label class="label">Sort by:</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select>
+                                        <option>Price: Low to High</option>
+                                        <option>Price: High to Low</option>
+                                        <option>Newest</option>
+                                        <option>Best Sellers</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="section" id="products">
+            <div class="container">
+                <h2 class="title is-3">Featured Products</h2>
+                
+                <div class="columns is-multiline">
+                    <!-- Product 1 -->
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card product-card">
+                            <div class="product-image">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">Pro Laptop 15"</div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>(248 reviews)</span>
+                                </div>
+                                <div class="product-description">High-performance laptop with latest processor and stunning display.</div>
+                                <div class="product-footer">
+                                    <div class="product-price">$1,299</div>
+                                    <button class="button is-small is-info add-to-cart">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card product-card">
+                            <div class="product-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">SmartPhone Pro Max</div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(512 reviews)</span>
+                                </div>
+                                <div class="product-description">Premium smartphone with 5G, advanced camera system, and AI features.</div>
+                                <div class="product-footer">
+                                    <div class="product-price">$999</div>
+                                    <button class="button is-small is-info add-to-cart">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card product-card">
+                            <div class="product-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <i class="fas fa-headphones"></i>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">Wireless Headphones</div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(189 reviews)</span>
+                                </div>
+                                <div class="product-description">Noise-cancelling wireless headphones with 40-hour battery life.</div>
+                                <div class="product-footer">
+                                    <div class="product-price">$299</div>
+                                    <button class="button is-small is-info add-to-cart">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card product-card">
+                            <div class="product-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                <i class="fas fa-watch"></i>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">Smart Watch Ultra</div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>(375 reviews)</span>
+                                </div>
+                                <div class="product-description">Feature-rich smartwatch with health tracking and fitness modes.</div>
+                                <div class="product-footer">
+                                    <div class="product-price">$399</div>
+                                    <button class="button is-small is-info add-to-cart">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card product-card">
+                            <div class="product-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">Digital Camera 4K</div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(267 reviews)</span>
+                                </div>
+                                <div class="product-description">Professional 4K camera with stabilization and advanced features.</div>
+                                <div class="product-footer">
+                                    <div class="product-price">$899</div>
+                                    <button class="button is-small is-info add-to-cart">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 6 -->
+                    <div class="column is-3-desktop is-6-tablet">
+                        <div class="card product-card">
+                            <div class="product-image" style="background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%);">
+                                <i class="fas fa-tablet-alt"></i>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">Tablet Pro 12.9"</div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(421 reviews)</span>
+                                </div>
+                                <div class="product-description">Powerful tablet perfect for creative professionals and students.</div>
+                                <div class="product-footer">
+                                    <div class="product-price">$749</div>
+                                    <button class="button is-small is-info add-to-cart">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="has-text-centered" style="margin-top: 2rem;">
+                    <button class="button is-large is-outlined">Load More Products</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="section" style="background: #f5f5f5;">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-8 is-offset-2 has-text-centered">
+                        <h2 class="title is-3">Subscribe to Our Newsletter</h2>
+                        <p style="margin-bottom: 1.5rem; color: #7a7a7a;">Get exclusive deals and updates on new products</p>
+                        <div class="field is-grouped">
+                            <p class="control is-expanded">
+                                <input class="input" type="email" placeholder="Enter your email address">
+                            </p>
+                            <p class="control">
+                                <button class="button is-info">Subscribe</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-3">
+                    <h3 class="title is-5">About TechHub</h3>
+                    <p>Your trusted source for premium tech products and electronics with competitive pricing.</p>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title is-5">Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title is-5">Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title is-5">Follow Us</h3>
+                    <div class="buttons">
+                        <a href="#" class="button is-rounded is-small is-light">
+                            <span class="icon"><i class="fab fa-facebook"></i></span>
+                        </a>
+                        <a href="#" class="button is-rounded is-small is-light">
+                            <span class="icon"><i class="fab fa-twitter"></i></span>
+                        </a>
+                        <a href="#" class="button is-rounded is-small is-light">
+                            <span class="icon"><i class="fab fa-instagram"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="has-text-centered">
+                <p>&copy; 2026 TechHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.5.28/dist/vue.global.min.js"></script>
+    <!-- JavaScript for interactivity -->
+    <script>
+        Vue.createApp({
+            setup(){
+                const isMenuActive= Vue.ref(false);
+                const toggleMenu = () => {
+                    isMenuActive.value = !isMenuActive.value;
+                }
+                return { isMenuActive, toggleMenu };
+            }
+        }).mount('body');
+    </script>
+</body>
+</html>
